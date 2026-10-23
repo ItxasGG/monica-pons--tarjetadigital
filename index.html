@@ -54,6 +54,21 @@
       text-align: center;
       box-shadow: 0 20px 50px -25px rgba(60, 50, 30, .25);
       animation: rise .6s ease-out both;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Árbol Davines de fondo */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: url("img/arbol.png") center bottom / cover no-repeat;
+      mix-blend-mode: multiply;
+      opacity: .45;
+      pointer-events: none;
     }
 
     @keyframes rise {
@@ -193,12 +208,20 @@
     }
 
     footer {
-      margin-top: 26px;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted);
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
     }
+
+    footer img {
+      display: block;
+      filter: brightness(1.08) contrast(1.1); /* lleva el fondo gris claro de los logos a blanco... */
+      mix-blend-mode: multiply;               /* ...y lo funde con la tarjeta */
+    }
+    .logo-davines { width: 112px; height: auto; }
+    .logo-bcorp { height: 54px; width: auto; }
 
     /* Toast */
     .toast {
@@ -228,9 +251,7 @@
 <body>
 
   <main class="card">
-    <!-- Para usar tu foto, sustituye "MP" por:
-         <img src="foto.jpg" alt="Mónica Pons"> -->
-    <div class="avatar" aria-hidden="true">MP</div>
+    <div class="avatar"><img src="img/monica.png" alt="Mónica Pons"></div>
 
     <h1>Mónica Pons</h1>
     <p class="role">Asesora comercial · Davines</p>
@@ -288,7 +309,10 @@
       </button>
     </div>
 
-    <footer>Davines · For a Good Life</footer>
+    <footer>
+      <img class="logo-davines" src="img/davines-logo.png" alt="Davines">
+      <img class="logo-bcorp" src="img/bcorp.png" alt="Certified B Corporation">
+    </footer>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
