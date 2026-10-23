@@ -30,27 +30,26 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body { height: 100%; }
-
     body {
       font-family: "Inter", system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      min-height: 100vh;
       min-height: 100dvh;
-      padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+      padding: calc(32px + env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom));
     }
 
     .card {
+      /* margin:auto centra la tarjeta, y si es más alta que la pantalla empieza arriba sin cortarse */
+      margin: auto;
       width: 100%;
       max-width: 400px;
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 28px;
-      padding: 40px 24px 28px;
+      padding: 44px 24px 32px;
       text-align: center;
       box-shadow: 0 20px 50px -25px rgba(60, 50, 30, .25);
       animation: rise .6s ease-out both;
@@ -218,13 +217,9 @@
       gap: 22px;
     }
 
-    footer img {
-      display: block;
-      filter: brightness(1.08) contrast(1.1); /* lleva el fondo gris claro de los logos a blanco... */
-      mix-blend-mode: multiply;               /* ...y lo funde con la tarjeta */
-    }
+    footer img { display: block; }   /* PNG con fondo transparente */
     .logo-davines { width: 112px; height: auto; }
-    .logo-bcorp { height: 66px; width: auto; filter: brightness(1.1) contrast(1.6); }
+    .logo-bcorp { height: 62px; width: auto; }
 
     /* Toast */
     .toast {
