@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mónica Pons · Davines</title>
+  <meta name="description" content="Mónica Pons, asesora comercial en Davines. Acompaño a tu salón a crecer con Davines.">
+  <meta name="theme-color" content="#f4efe6">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, redes...) -->
+  <meta property="og:title" content="Mónica Pons · Asesora comercial en Davines">
+  <meta property="og:description" content="Acompaño a tu salón a crecer con Davines.">
+  <meta property="og:type" content="profile">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --card: #fbf8f2;
+      --ink: #2b2a26;
+      --muted: #7a756a;
+      --accent: #4f5b45;       /* verde salvia */
+      --accent-soft: #e4e6dc;
+      --line: #e3dccd;
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+    }
+
+    .card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 40px 24px 28px;
+      text-align: center;
+      box-shadow: 0 20px 50px -25px rgba(60, 50, 30, .25);
+      animation: rise .6s ease-out both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ---------- Foto / iniciales ---------- */
+    .avatar {
+      width: 116px;
+      height: 116px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #f4efe6;
+      display: grid;
+      place-items: center;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 44px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      box-shadow: 0 0 0 6px var(--card), 0 0 0 7px var(--line);
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- Textos ---------- */
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: .3px;
+    }
+
+    .role {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin: 18px auto 0;
+      max-width: 280px;
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--line);
+      margin: 26px auto;
+    }
+
+    /* ---------- Botones de contacto ---------- */
+    .contact {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .contact a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 11.5px;
+      font-weight: 500;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .contact .icon {
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 68px;
+      border-radius: var(--radius);
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      transition: transform .15s ease, background .2s ease, color .2s ease;
+    }
+
+    .contact a:hover .icon,
+    .contact a:focus-visible .icon { background: var(--accent); color: #fff; }
+    .contact a:active .icon { transform: scale(.94); }
+
+    .contact svg { width: 26px; height: 26px; }
+
+    /* ---------- Botones principales ---------- */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 54px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      font: 600 15px/1 "Inter", sans-serif;
+      letter-spacing: .2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, background .2s ease, color .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #3f4a37; }
+
+    .btn-outline { background: transparent; color: var(--accent); }
+    .btn-outline:hover { background: var(--accent-soft); }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(24px + env(safe-area-inset-bottom));
+      transform: translate(-50%, 20px);
+      background: var(--ink);
+      color: #fff;
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 340px) {
+      .card { padding: 32px 16px 24px; }
+      h1 { font-size: 30px; }
+      .contact { gap: 6px; }
+      .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <!-- Para usar tu foto, sustituye "MP" por:
+         <img src="foto.jpg" alt="Mónica Pons"> -->
+    <div class="avatar" aria-hidden="true">MP</div>
+
+    <h1>Mónica Pons</h1>
+    <p class="role">Asesora comercial · Davines</p>
+    <p class="tagline">Acompaño a tu salón a crecer con Davines.</p>
+
+    <div class="divider"></div>
+
+    <nav class="contact" aria-label="Contacto">
+      <a href="https://wa.me/34662526356" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.57.94.95-3.48-.22-.36a9.43 9.43 0 1 1 7.99 4.42zm8.03-17.46A11.36 11.36 0 0 0 1.84 17.73L.25 23.5l5.9-1.55a11.32 11.32 0 0 0 5.43 1.38h.01A11.36 11.36 0 0 0 20.08 4.04z"/></svg>
+        </span>
+        WhatsApp
+      </a>
+      <a href="tel:+34662526356">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </span>
+        Llamar
+      </a>
+      <a href="mailto:m.pons@davines.es">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        </span>
+        Email
+      </a>
+      <a href="https://instagram.com/monicapons_profesional" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r=".6" fill="currentColor"/></svg>
+        </span>
+        Instagram
+      </a>
+    </nav>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="saveContact" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+        Guardar contacto
+      </button>
+
+      <div class="row">
+        <a class="btn btn-outline" href="https://es.davines.com" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Web
+        </a>
+        <a class="btn btn-outline" href="https://it.davines.com/pages/for-a-good-life" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          For a Good Life
+        </a>
+      </div>
+
+      <button class="btn btn-outline" id="shareCard" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+        Compartir tarjeta
+      </button>
+    </div>
+
+    <footer>Davines · For a Good Life</footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const contact = {
+      firstName: "Mónica",
+      lastName: "Pons",
+      org: "Davines",
+      title: "Asesora comercial",
+      phone: "+34662526356",
+      email: "m.pons@davines.es",
+      web: "https://es.davines.com",
+      instagram: "https://instagram.com/monicapons_profesional",
+      note: "Acompaño a tu salón a crecer con Davines."
+    };
+
+    function buildVCard(c) {
+      return [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `N:${c.lastName};${c.firstName};;;`,
+        `FN:${c.firstName} ${c.lastName}`,
+        `ORG:${c.org}`,
+        `TITLE:${c.title}`,
+        `TEL;TYPE=CELL,VOICE:${c.phone}`,
+        `EMAIL;TYPE=INTERNET,WORK:${c.email}`,
+        `URL:${c.web}`,
+        `X-SOCIALPROFILE;TYPE=instagram:${c.instagram}`,
+        `NOTE:${c.note}`,
+        "END:VCARD"
+      ].join("\r\n");
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => t.classList.remove("show"), 2400);
+    }
+
+    document.getElementById("saveContact").addEventListener("click", () => {
+      const blob = new Blob([buildVCard(contact)], { type: "text/vcard;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Monica-Pons-Davines.vcf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast("Contacto descargado");
+    });
+
+    document.getElementById("shareCard").addEventListener("click", async () => {
+      const data = {
+        title: "Mónica Pons · Davines",
+        text: "Te comparto mi tarjeta de contacto:",
+        url: location.href
+      };
+      if (navigator.share) {
+        try { await navigator.share(data); } catch (_) { /* cancelado */ }
+      } else {
+        try {
+          await navigator.clipboard.writeText(location.href);
+          showToast("Enlace copiado");
+        } catch (_) {
+          showToast(location.href);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
