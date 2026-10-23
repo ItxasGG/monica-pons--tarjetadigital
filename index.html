@@ -14,7 +14,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -115,12 +115,15 @@
 
     .tagline {
       margin: 18px auto 0;
-      max-width: 280px;
+      max-width: 300px;
       font-family: "Cormorant Garamond", serif;
       font-style: italic;
-      font-size: 20px;
-      line-height: 1.35;
-      color: var(--muted);
+      font-weight: 600;
+      font-size: 23px;
+      line-height: 1.3;
+      color: var(--ink);
+      /* halo color tarjeta para que el árbol no ensucie las letras */
+      text-shadow: 0 0 6px var(--card), 0 0 12px var(--card), 0 0 2px var(--card);
     }
 
     .divider {
@@ -240,6 +243,46 @@
     }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+    /* ---------- Ventana del QR ---------- */
+    .qr-dialog {
+      margin: auto;
+      width: calc(100% - 32px);
+      max-width: 340px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--card);
+      color: var(--ink);
+      padding: 28px 24px 24px;
+      text-align: center;
+      box-shadow: 0 30px 60px -20px rgba(40, 35, 20, .35);
+    }
+    .qr-dialog::backdrop { background: rgba(43, 42, 38, .45); backdrop-filter: blur(3px); }
+
+    .qr-dialog h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 26px;
+    }
+    .qr-dialog p { margin-top: 6px; font-size: 13px; color: var(--muted); }
+
+    .qr-box {
+      margin: 20px auto;
+      width: 220px;
+      aspect-ratio: 1;
+      padding: 12px;
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .qr-box svg { width: 100%; height: 100%; display: block; }
+
+    .qr-dialog .btn + .btn { margin-top: 10px; }
+    .btn[hidden] { display: none; }
+
     @media (max-width: 340px) {
       .card { padding: 32px 16px 24px; }
       h1 { font-size: 30px; }
@@ -303,6 +346,11 @@
         </a>
       </div>
 
+      <button class="btn btn-outline" id="showQr" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 17h4v4h-4"/></svg>
+        Compartir con QR
+      </button>
+
       <button class="btn btn-outline" id="shareCard" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
         Compartir tarjeta
@@ -315,9 +363,20 @@
     </footer>
   </main>
 
+  <dialog class="qr-dialog" id="qrDialog" aria-labelledby="qrTitle">
+    <h2 id="qrTitle">Escanea mi tarjeta</h2>
+    <p>Apunta con la cámara del móvil para abrirla</p>
+    <div class="qr-box" id="qrBox"></div>
+    <a class="btn btn-primary" id="downloadQr" download="QR-Monica-Pons-Davines.png">Descargar QR</a>
+    <button class="btn btn-outline" id="closeQr" type="button">Cerrar</button>
+  </dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
   <script>
+    // Enlace público de la tarjeta (se usa si la página se abre desde el ordenador como archivo)
+    const CARD_URL = "https://itxasgg.github.io/monica-pons--tarjetadigital/";
     const contact = {
       firstName: "Mónica",
       lastName: "Pons",
@@ -372,19 +431,45 @@
       const data = {
         title: "Mónica Pons · Davines",
         text: "Te comparto mi tarjeta de contacto:",
-        url: location.href
+        url: cardUrl()
       };
       if (navigator.share) {
         try { await navigator.share(data); } catch (_) { /* cancelado */ }
       } else {
         try {
-          await navigator.clipboard.writeText(location.href);
+          await navigator.clipboard.writeText(cardUrl());
           showToast("Enlace copiado");
         } catch (_) {
-          showToast(location.href);
+          showToast(cardUrl());
         }
       }
     });
+
+    function cardUrl() {
+      return location.protocol.startsWith("http") ? location.href.split("#")[0] : CARD_URL;
+    }
+
+    const qrDialog = document.getElementById("qrDialog");
+    const qrBox = document.getElementById("qrBox");
+    const downloadQr = document.getElementById("downloadQr");
+
+    document.getElementById("showQr").addEventListener("click", () => {
+      if (typeof qrcode === "function") {
+        const qr = qrcode(0, "M");
+        qr.addData(cardUrl());
+        qr.make();
+        qrBox.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+        downloadQr.href = qr.createDataURL(10, 4);
+        downloadQr.hidden = false;
+      } else {
+        qrBox.textContent = "No se ha podido generar el QR. Revisa tu conexión.";
+        downloadQr.hidden = true;
+      }
+      qrDialog.showModal();
+    });
+
+    document.getElementById("closeQr").addEventListener("click", () => qrDialog.close());
+    qrDialog.addEventListener("click", (e) => { if (e.target === qrDialog) qrDialog.close(); });
   </script>
 </body>
 </html>
